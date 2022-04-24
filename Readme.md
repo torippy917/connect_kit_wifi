@@ -23,6 +23,11 @@ disconnect_kit_wifi.ps1の動作
 
 
 # インストール手順
+事前にVisual Studio と Git for Windows がインストールされていること.
+以下のことを聞かれたから｢A｣を入力してエンターを押すこと.  
+```Do you want to run software from this untrusted publisher?```
+
+
 1. PowerShellを管理者権限で実行する.  
 以下のコマンドを実行する.  
 ```
@@ -44,7 +49,7 @@ Move-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" Cert:\CurrentUser\Root
 ```
 cd ~
 git clone https://github.com/torippy917/kit_wifi.git
-start connect_kit_wifi\RefleshInternetOption\RefleshInternetOption.vcxproj
+start kit_wifi\RefleshInternetOption\RefleshInternetOption.vcxproj
 ```
 
 3. VisualStudioが開くので, X64, Releaseに設定してプログラムをビルドする.
@@ -53,9 +58,13 @@ start connect_kit_wifi\RefleshInternetOption\RefleshInternetOption.vcxproj
 4. PowerShellスクリプトに署名する.
 2.で開いたPowerShellで以下のコマンドを実行する.  
 ```
+cd ~/kit_wifi/
 # 証明書への参照を取得
 $rootcert = @(Get-ChildItem cert:\CurrentUser\Root -CodeSigningCert)[0]
 # スクリプトに署名
 Set-AuthenticodeSignature .\connect_kit_wifi.ps1 $rootcert
 Set-AuthenticodeSignature .\disconnect_kit_wifi.ps1 $rootcert
 ```
+
+# 使い方
+connect_kit_wifi.ps1 または disconnect_kit_wifi.ps1をPowerShellで実行する.
