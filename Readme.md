@@ -1,14 +1,14 @@
 # 概要
-金沢工業大学のWiFiへの接続と切断を行うスクリプト.
-connect_kit_wifi.ps1でWiFiへの接続とプロキシの有効化･設定を行える.
-disconnect_kit_wifi.ps1でWiFiの切断とプロキシの無効化を行える.
+金沢工業大学のWiFiへの接続と切断を行うスクリプト.  
+connect_kit_wifi.ps1でWiFiへの接続とプロキシの有効化･設定を行える.  
+disconnect_kit_wifi.ps1でWiFiの切断とプロキシの無効化を行える.  
 
-想定している用途は以下の通り
-・学内WiFiに接続してプロキシを設定する.
-・WiFiの調子が悪いときに接続し直す.
-・WiFiを切断してプロキシを無効化する.
+想定している用途は以下の通り  
+・学内WiFiに接続してプロキシを設定する.  
+・WiFiの調子が悪いときに接続し直す.  
+・WiFiを切断してプロキシを無効化する.  
 
-connect_kit_wifi.ps1の動作
+connect_kit_wifi.ps1の動作  
 1. WiFiの切断
 2. KIT-WLAP2への接続
 3. プロキシの有効化
@@ -16,15 +16,15 @@ connect_kit_wifi.ps1の動作
 5. プロキシを使用しないIPアドレスの設定
 6. インターネットオプションのリフレッシュ.(ブラウザに設定を反映させるために必要)
 
-disconnect_kit_wifi.ps1の動作
+disconnect_kit_wifi.ps1の動作  
 1. WiFiの切断
 2. プロキシの無効化
 3. インターネットオプションのリフレッシュ.(ブラウザに設定を反映させるために必要)
 
 
 # インストール手順
-1. PowerShellを管理者権限で実行する.
-以下のコマンドを実行する.
+1. PowerShellを管理者権限で実行する.  
+以下のコマンドを実行する.  
 ```
 Set-ExecutionPolicy AllSigned -Scope CurrentUser -Force
 # 署名用の証明書を作成
@@ -40,7 +40,7 @@ Move-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" Cert:\CurrentUser\Root
 ```
 
 2. 管理者権限なしでPowerShellを開き直す. (後で使うので閉じないこと)
-以下のコマンドを実行する. 学内にいる場合はgitのプロキシを設定すること.
+以下のコマンドを実行する. 学内にいる場合はgitのプロキシを設定すること.  
 ```
 cd ~
 git clone https://github.com/torippy917/kit_wifi.git
@@ -51,7 +51,7 @@ start connect_kit_wifi\RefleshInternetOption\RefleshInternetOption.vcxproj
 
 
 4. PowerShellスクリプトに署名する.
-2.で開いたPowerShellで以下のコマンドを実行する.
+2.で開いたPowerShellで以下のコマンドを実行する.  
 ```
 # 証明書への参照を取得
 $rootcert = @(Get-ChildItem cert:\CurrentUser\Root -CodeSigningCert)[0]
