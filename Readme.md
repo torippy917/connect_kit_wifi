@@ -42,6 +42,7 @@ $cert = New-SelfSignedCertificate `
         -NotAfter ([datetime]"2099/01/01")
 # 信頼済みのルートとして使用
 Move-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" Cert:\CurrentUser\Root
+
 ```
 
 2. 管理者権限なしでPowerShellを開き直す. (後で使うので閉じないこと)
@@ -50,6 +51,7 @@ Move-Item "Cert:\CurrentUser\My\$($cert.Thumbprint)" Cert:\CurrentUser\Root
 cd ~
 git clone https://github.com/torippy917/kit_wifi.git
 start kit_wifi\RefleshInternetOption\RefleshInternetOption.vcxproj
+
 ```
 
 3. VisualStudioが開くので, X64, Releaseに設定してプログラムをビルドする.
@@ -64,6 +66,7 @@ $rootcert = @(Get-ChildItem cert:\CurrentUser\Root -CodeSigningCert)[0]
 # スクリプトに署名
 Set-AuthenticodeSignature .\connect_kit_wifi.ps1 $rootcert
 Set-AuthenticodeSignature .\disconnect_kit_wifi.ps1 $rootcert
+
 ```
 
 # 使い方
